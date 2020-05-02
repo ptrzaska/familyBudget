@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "../family-budget-app/node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "../family-budget-app/src/styles.less"
             ],
             "scripts": []
           },

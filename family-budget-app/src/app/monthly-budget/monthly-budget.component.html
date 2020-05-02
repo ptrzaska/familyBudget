@@ -1,1 +1,27 @@
-<p>monthly-budget works!</p>
+<div class="row">
+  <div class="col-md-4 order-md-2 mb-4">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-muted">Wydatki stałe</span>
+      <span class="badge badge-secondary badge-pill">{{plan.constPlannedCosts ? plan.constPlannedCosts.length : 0}}</span>
+    </h4>
+    <ul class="list-group mb-3">
+      <li *ngFor="let cost of plan.constPlannedCosts" class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <h6 class="my-0">{{cost.name}}</h6>
+          <small class="text-muted">{{cost.lastModificationDate}}</small>
+        </div>
+        <span class="text-muted">Suma wydatków: {{cost.getExpensesSum()}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Suma</span>
+        <strong></strong>
+      </li>
+    </ul>
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Nazwa">
+        <div class="input-group-inline">
+          <button style="margin-left: 5px" type="button" class="btn btn-secondary">Dodaj</button>
+        </div>
+      </div>
+  </div>
