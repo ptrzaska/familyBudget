@@ -2,11 +2,10 @@ import { Expense } from '.';
 
 export class PlanEntry {
   lastModificationDate: Date;
-  plan: number;
   expenses: Expense[];
 
-  constructor(public name: string) {
-
+  constructor(public name: string, public value: number) {
+    this.expenses = [];
   }
 
   getExpensesSum(): number {
