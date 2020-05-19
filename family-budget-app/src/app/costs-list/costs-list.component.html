@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-muted">{{listTitle}}</span>
+      <span class="badge badge-secondary badge-pill">{{costs ? costs.length : 0}}</span>
+    </h4>
+  </div>
+
+  <div class="card-body">
+    <ul class="list-group mb-3">
+      <li *ngFor="let cost of costs" class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <h6 class="my-0">{{cost.name}}</h6>
+          <small class="text-muted">{{cost.lastModificationDate}}</small>
+        </div>
+        <span class="text-muted">Suma wydatków: {{cost.getExpensesSum()}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Suma</span>
+        <strong></strong>
+      </li>
+    </ul>
+
+
+  </div>
+</div>
