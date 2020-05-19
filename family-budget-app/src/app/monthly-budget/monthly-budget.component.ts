@@ -31,8 +31,8 @@ export class MonthlyBudgetComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.plan = new Plan ();
     this.plan.archived = false;
-    this.plan.currentPlannedCosts = [ new PlanEntry('Dentysta'),
-      new PlanEntry('Opony')
+    this.plan.currentPlannedCosts = [ new PlanEntry('Dentysta', 180),
+      new PlanEntry('Opony', 1000)
     ];
     this.plan.date = new MonthYear(5, 2020);
 
