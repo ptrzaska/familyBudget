@@ -8,13 +8,38 @@
 
   <div class="card-body">
     <ul class="list-group mb-3">
-      <li *ngFor="let cost of costs" class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 class="my-0">{{cost.name}}</h6>
-          <small class="text-muted">{{cost.lastModificationDate}}</small>
+      <li *ngFor="let cost of costs" class="list-group-item d-flex justify-content-between lh-condensed" [style.background-color]="cost.isCompleted ? '#adebad' : 'white'">
+        <div class="container" >
+          <div class="row" style="width: 100%;">
+            <div class="col-md-4"><h6 class="my-0">{{cost.name}}</h6></div>
+            <div class="col-md-4">{{cost.lastModificationDate}}</div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="row" style="width: 100%;">
+            <div class="col-md-3"><span class="text-muted">Plan: {{cost.value}}</span></div>
+            <div class="col-md-3"><span class="text-muted">Wydatki: {{cost.getExpensesSum()}}</span></div>
+            <div class="col-md-2"><span class="text-muted">Saldo: {{cost.value - cost.getExpensesSum()}}</span></div>
+            <div class="col-md-4" style="text-align: center;">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)" style="margin-right: 5px;" [disabled]="cost.isCompleted"><i class="fa fa-plus-circle"></i></button>
+              <button type="button"
+              *ngIf="!cost.isCompleted; else activationButton"
+                class="btn btn-outline-secondary btn-sm"
+                (click)="cost.isCompleted = true"
+                style="margin-right: 5px;">
+                <i class="fa fa-check-square-o"></i>
+              </button>
+              <ng-template #activationButton>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cost.isCompleted = false" style="margin-right: 5px;"><i class="fa fa-share-square-o"></i></button>
+              </ng-template>
+
+
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)"><i class="fa fa-list"></i></button>
+            </div>
+          </div>
         </div>
-        <span class="text-muted">Suma wydatków: {{cost.getExpensesSum()}}</span>
-        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)">Dodaj wydatek</button>
+
+
+
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <span>Suma</span>
