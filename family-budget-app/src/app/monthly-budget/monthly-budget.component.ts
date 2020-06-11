@@ -2,7 +2,7 @@ import { TimeBoundedPlanEntry } from './../models/time-bounded-plan-entry';
 import { MonthYear } from './../models/month-year';
 import { PlanEntry } from './../models/plan-entry';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Plan } from '../models';
+import { Plan, Expense } from '../models';
 import { MonthlyBudgetService } from './monthly-budget.service';
 
 const DATE_INPUT_NAME = 'date';

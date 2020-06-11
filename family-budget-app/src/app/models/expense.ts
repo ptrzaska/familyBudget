@@ -1,6 +1,7 @@
 export class Expense {
-  value: number;
-  date: Date;
-  description: string;
   recordId: string;
+
+  constructor(public value: number, public date: Date, public description: string) {
+
+  }
 }

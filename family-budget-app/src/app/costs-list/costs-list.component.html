@@ -14,10 +14,11 @@
           <small class="text-muted">{{cost.lastModificationDate}}</small>
         </div>
         <span class="text-muted">Suma wydatków: {{cost.getExpensesSum()}}</span>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)">Dodaj wydatek</button>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <span>Suma</span>
-        <strong></strong>
+        <strong>{{ getCostsSum() }}</strong>
       </li>
     </ul>
 
