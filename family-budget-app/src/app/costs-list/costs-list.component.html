@@ -5,39 +5,53 @@
       <span class="badge badge-secondary badge-pill">{{costs ? costs.length : 0}}</span>
     </h4>
   </div>
-
   <div class="card-body">
     <ul class="list-group mb-3">
-      <li *ngFor="let cost of costs" class="list-group-item d-flex justify-content-between lh-condensed" [style.background-color]="cost.isCompleted ? '#adebad' : 'white'">
-        <div class="container" >
+      <li *ngFor="let cost of costs; let i = index" class="list-group-item d-flex justify-content-between lh-condensed"
+        [style.background-color]="cost.isCompleted ? '#adebad' : 'white'">
+        <div class="container">
           <div class="row" style="width: 100%;">
-            <div class="col-md-4"><h6 class="my-0">{{cost.name}}</h6></div>
-            <div class="col-md-4">{{cost.lastModificationDate}}</div>
-            <div class="col-md-4"></div>
-          </div>
-          <div class="row" style="width: 100%;">
-            <div class="col-md-3"><span class="text-muted">Plan: {{cost.value}}</span></div>
-            <div class="col-md-3"><span class="text-muted">Wydatki: {{cost.getExpensesSum()}}</span></div>
+            <div class="col-md-2"><h6 class="my-0">{{cost.name}}</h6></div>
+            <div class="col-md-2">{{cost.lastModificationDate}}</div>
+            <div class="col-md-2"><span class="text-muted">Plan: {{cost.value}}</span></div>
+            <div class="col-md-2"><span class="text-muted">Wydatki: {{cost.getExpensesSum()}}</span></div>
             <div class="col-md-2"><span class="text-muted">Saldo: {{cost.value - cost.getExpensesSum()}}</span></div>
-            <div class="col-md-4" style="text-align: center;">
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)" style="margin-right: 5px;" [disabled]="cost.isCompleted"><i class="fa fa-plus-circle"></i></button>
-              <button type="button"
-              *ngIf="!cost.isCompleted; else activationButton"
-                class="btn btn-outline-secondary btn-sm"
-                (click)="cost.isCompleted = true"
-                style="margin-right: 5px;">
+            <div class="col-md-2" style="text-align: center;">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)"
+                style="margin-right: 5px;" [disabled]="cost.isCompleted"><i class="fa fa-plus-circle"></i></button>
+              <button type="button" *ngIf="!cost.isCompleted; else activationButton"
+                class="btn btn-outline-secondary btn-sm" (click)="cost.isCompleted = true" style="margin-right: 5px;">
                 <i class="fa fa-check-square-o"></i>
               </button>
               <ng-template #activationButton>
-                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cost.isCompleted = false" style="margin-right: 5px;"><i class="fa fa-share-square-o"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cost.isCompleted = false"
+                  style="margin-right: 5px;"><i class="fa fa-share-square-o"></i></button>
               </ng-template>
-
-
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addNewExpense(cost)"><i class="fa fa-list"></i></button>
-            </div>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="collapse"
+                [attr.data-target]="'#collapse' + i"><i class="fa fa-list"></i></button>
+              </div>
           </div>
+          <div [id]="'collapse' + i" class="row collapse show">
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Wartość</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Opis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let expense of cost.expenses">
+                    <td>{{expense.value}}</td>
+                    <td>{{expense.date.getDay()}}-{{expense.date.getMonth()}}-{{expense.date.getFullYear()}}</td>
+                    <td>{{expense.description}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
         </div>
-
+        </div>
 
 
       </li>
@@ -46,7 +60,5 @@
         <strong>{{ getCostsSum() }}</strong>
       </li>
     </ul>
-
-
   </div>
 </div>
